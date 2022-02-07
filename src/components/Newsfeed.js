@@ -5,7 +5,7 @@ const Newsfeed = (props) => {
   let feedsData = props.newsFeedData;
   console.log('Feeds Data Newsfeed Component' + feedsData);
   return (
-    <div className="newsfeed component-padding">
+    <div id="newsfeed" className="newsfeed component-padding">
       <div className="newsfeed-content">
         <h2 className="newsfeed-heading">
           <span>

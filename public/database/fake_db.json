@@ -820,5 +820,14 @@
       "likerId": 1,
       "feedId": 2
     }
+  ],
+  "comments": [
+    { "id": 1, "ownerId": 1, "comment": "Hello there. Nice pic", "feedId": 2 },
+    {
+      "id": 2,
+      "ownerId": 2,
+      "comment": "Thanks for adding me as a friend",
+      "feedId": 1
+    }
   ]
 }

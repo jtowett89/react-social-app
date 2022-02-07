@@ -27,6 +27,7 @@ const App = () => {
   const [userDetails, setUserDetails] = useState({
     accessToken: '',
     user: {
+      id: 10000000000,
       name: '',
       email: '',
       password: '',
@@ -38,10 +39,14 @@ const App = () => {
   const showAllFeeds = () => {
     fetch(baseUrl + '/feeds')
       .then((res) => res.json())
-      .then((data) => {
+      .then((returnedData) => {
+        let data = returnedData.slice().sort((a, b) => b.id - a.id);
         let feedsArray = [];
         let filteredFeeds = [];
         let filteredFeedsByFriends = [];
+
+        // let data = JSON.parse();
+
         for (var i in data) feedsArray.push(data[i]);
         feedsArray.map((feedItem) => {
           filteredFeeds.push(feedItem);
@@ -57,9 +62,14 @@ const App = () => {
   };
 
   const showFriendFeeds = (id) => {
+    document.getElementById('sidebar').classList.remove('no-left');
+    document
+      .getElementById('newsfeed')
+      .scrollIntoView({ block: 'start', behavior: 'smooth' });
     fetch(baseUrl + '/feeds')
       .then((res) => res.json())
-      .then((data) => {
+      .then((returnedData) => {
+        let data = returnedData.slice().sort((a, b) => b.id - a.id);
         console.log('OwnerID: ' + data.ownerId);
         let feedsArray = [];
         let filteredFeeds = [];
@@ -105,7 +115,7 @@ const App = () => {
       })
       .catch((error) => {
         alert('Invalid Email and/or password');
-        console.log('Error 2: ' + error);
+        console.error('Error: ' + error);
       });
   };
 
@@ -193,7 +203,8 @@ const App = () => {
 
     fetch(baseUrl + '/users')
       .then((res) => res.json())
-      .then((data) => {
+      .then((returnedData) => {
+        let data = returnedData.slice().sort((a, b) => b.id - a.id);
         setFetchedUsersData(JSON.parse(JSON.stringify(data)));
         console.info('Info: ' + fetchedUsersData);
 
@@ -206,7 +217,8 @@ const App = () => {
 
     fetch(baseUrl + '/feeds')
       .then((res) => res.json())
-      .then((data) => {
+      .then((returnedData) => {
+        let data = returnedData.slice().sort((a, b) => b.id - a.id);
         setFetchedFeedsData(JSON.parse(JSON.stringify(data)));
         console.info('Info: ' + fetchedFeedsData);
 
