@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from "react";
+
 const Footer = () => {
   const date = new Date();
   const year = date.getFullYear();
