@@ -1,21 +1,63 @@
-import thumb from '../images/ppic.png';
+// import thumb from '../images/ppic.png';
 import React, { useState, useEffect } from 'react';
 
 const SingleFeed = (props) => {
   let allUsers = props.allUsers;
   let feedOwnerId = props.ownerId;
-  allUsers.map((user) => {});
+  let feedId = props.feedId;
+
   const [ownerId, setOwnerId] = useState(10000000000);
-  const [comment, setComment] = useState('');
+  const [comments, setComments] = useState([]);
+  const [commentInputState, setCommentInputState] = useState('');
+  const [userName, setUserName] = useState('');
+  const [feedLikes, setFeedLikes] = useState(0);
+  const [feedCommentsNumber, setFeedCommentsNumber] = useState(0);
+  const [ownerPhoto, setOwnerPhoto] = useState(
+    'http://justice.zerone.co.ke/images/user.jpg'
+  );
+  const [likes, setLikes] = useState(0);
+
+  let likesCount = 0;
+  let commentsCount = 0;
+  let commentStrings = [];
+
+  const userPhoto = () => {
+    allUsers.map((user) => {
+      if (user.id === feedOwnerId) {
+        setOwnerPhoto(user.photo);
+        console.log(user.phpto);
+      }
+    });
+  };
+  const currentLikes = () => {
+    props.likes.map((like) => {
+      if (like.feedId === feedId) {
+        likesCount++;
+      }
+    });
+    setFeedLikes(likesCount);
+  };
+  const currentCommentsNumber = () => {
+    props.comments.map((comment) => {
+      if (comment.feedId === feedId) {
+        commentStrings.push(comment.comment);
+        commentsCount++;
+      }
+    });
+    setComments(commentStrings);
+    setFeedCommentsNumber(commentsCount);
+  };
+
   const handleChange = (e) => {
-    e.target.name === 'comment' && setComment(e.target.value);
+    e.target.name === 'comment' && setCommentInputState(e.target.value);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+
   useEffect(() => {
     setOwnerId(feedOwnerId);
-  });
+    userPhoto();
+    currentLikes();
+    currentCommentsNumber();
+  }, []);
   return (
     <div className="newsfeed-single">
       <div
@@ -25,7 +67,7 @@ const SingleFeed = (props) => {
           alignItems: 'center',
         }}
       >
-        <img className="feed-thumb" src={thumb} alt="" />
+        <img className="feed-thumb" src={ownerPhoto} alt="" />
       </div>
       <div style={{ width: '100%' }}>
         <div className="newsfeed-body">
@@ -33,14 +75,25 @@ const SingleFeed = (props) => {
         </div>
         <div className="newsfeed-controls">
           <a className="like-btn">
-            <i className="fa fa-thumbs-up"></i> 12
+            <i className="fa fa-thumbs-up"></i> {feedLikes}
           </a>
           <a className="comment-btn">
-            <i className="fa fa-comments"></i> 0
+            <i className="fa fa-comments"></i> {feedCommentsNumber}
           </a>
           <br />
           <br />
-          <form onSubmit={handleSubmit} style={{ display: 'inline' }}>
+          <div style={{ marginLeft: '1.5em', width: 'calc(100%-1.5em)' }}>
+            <small style={{ marginBottom: '.8em' }} className="zeraki-blue">
+              <b>Comments</b>
+            </small>
+            <br />
+            {comments.map((comment) => {
+              return <p>{comment}</p>;
+            })}
+          </div>
+          <br />
+          <br />
+          <form onSubmit={props.handleComment} style={{ display: 'inline' }}>
             <input
               style={{
                 width: '75% ',
@@ -50,7 +103,7 @@ const SingleFeed = (props) => {
               onChange={handleChange}
               name="comment"
               type="text"
-              value={comment}
+              value={commentInputState}
             />
             <button
               className="logout-btn"

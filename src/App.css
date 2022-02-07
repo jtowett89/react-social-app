@@ -349,13 +349,14 @@ input[type='password'] {
   border-bottom: 1px solid #e0e0e0;
   padding-bottom: 2em;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .feed-thumb {
   border-radius: 50%;
   width: 3em;
   height: 3em;
   margin-right: 1em;
+  margin-top: 1em;
 }
 .newsfeed-body {
   width: 100%;

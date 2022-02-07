@@ -18,12 +18,15 @@ const Newsfeed = (props) => {
         {feedsData.map((feed) => {
           return (
             <SingleFeed
+              handleComment={props.handleComment}
               key={feed.id}
               ownerId={feed.ownerId}
               feed={feed.feed}
-              id={feed.id}
+              feedId={feed.id}
               allUsers={props.allUsers}
               currentUser={props.userDetails}
+              likes={props.likes}
+              comments={props.comments}
             />
           );
         })}

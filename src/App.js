@@ -24,6 +24,8 @@ const App = () => {
   const [loggedInState, setLoggedInState] = useState('false');
   const [errorMsg, setErroroMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [fetchedLikesData, setFetchedLikesData] = useState([]);
+  const [fetchedCommentsData, setFetchedCommentsData] = useState([]);
   const [userDetails, setUserDetails] = useState({
     accessToken: '',
     user: {
@@ -31,7 +33,7 @@ const App = () => {
       name: '',
       email: '',
       password: '',
-      photo: 'http://www.musicteacher.info/user/img/default/user.png',
+      photo: 'http://justice.zerone.co.ke/images/user.jpg',
       friends: [],
     },
   });
@@ -44,13 +46,17 @@ const App = () => {
         let feedsArray = [];
         let filteredFeeds = [];
         let filteredFeedsByFriends = [];
-
-        // let data = JSON.parse();
+        let usersFriends = [];
 
         for (var i in data) feedsArray.push(data[i]);
         feedsArray.map((feedItem) => {
           filteredFeeds.push(feedItem);
         });
+        // userDetails.map((like) => {});
+        // filteredFeeds.map((feed) => {
+        //   if (feed) {
+        //   }
+        // });
         setFetchedFeedsData(filteredFeeds);
         console.info('All Feeds Data: ' + JSON.stringify(feedsArray));
         setIsLoading(false);
@@ -85,6 +91,13 @@ const App = () => {
         setErroroMsg(error);
         console.log('Error: ' + error);
       });
+  };
+
+  const postComment = () => {};
+
+  const handleComment = (e) => {
+    e.preventDefault();
+    postComment();
   };
 
   const setLogin = (email, password) => {
@@ -208,7 +221,7 @@ const App = () => {
         setFetchedUsersData(JSON.parse(JSON.stringify(data)));
         console.info('Info: ' + fetchedUsersData);
 
-        setIsLoading(false);
+        // setIsLoading(false);
       })
       .catch((error) => {
         setErroroMsg(error);
@@ -221,6 +234,34 @@ const App = () => {
         let data = returnedData.slice().sort((a, b) => b.id - a.id);
         setFetchedFeedsData(JSON.parse(JSON.stringify(data)));
         console.info('Info: ' + fetchedFeedsData);
+
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        setErroroMsg(error);
+        console.log('Error: ' + error);
+      });
+
+    fetch(baseUrl + '/likes')
+      .then((res) => res.json())
+      .then((returnedData) => {
+        let data = returnedData.slice().sort((a, b) => b.id - a.id);
+        setFetchedLikesData(JSON.parse(JSON.stringify(data)));
+        console.info('Info: ' + fetchedLikesData);
+
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setErroroMsg(error);
+        console.log('Error: ' + error);
+      });
+
+    fetch(baseUrl + '/comments')
+      .then((res) => res.json())
+      .then((returnedData) => {
+        let data = returnedData.slice().sort((a, b) => b.id - a.id);
+        setFetchedCommentsData(JSON.parse(JSON.stringify(data)));
+        console.info('Info: ' + fetchedCommentsData);
 
         setIsLoading(false);
       })
@@ -254,10 +295,13 @@ const App = () => {
                   setLogout={setLogout}
                 />
                 <Newsfeed
+                  handleComment={handleComment}
                   userDetails={userDetails}
                   allUsers={fetchedUsersData}
                   newsFeedData={fetchedFeedsData}
                   showAll={showAllFeeds}
+                  likes={fetchedLikesData}
+                  comments={fetchedCommentsData}
                 />
                 <Sidebar
                   showFriendFeeds={showFriendFeeds}
