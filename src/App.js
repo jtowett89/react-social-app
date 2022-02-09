@@ -209,6 +209,8 @@ const App = () => {
       .then((data) => {
         console.log("Returned Data: " + data);
         fetchFeeds();
+        fetchComments();
+        fetchLikes();
         return;
       })
       .catch((error) => {
@@ -244,9 +246,10 @@ const App = () => {
       .then((data) => {
         console.info("Info: (Posted Comment Data) " + JSON.stringify(data));
 
+        fetchFeeds();
         fetchComments();
+        fetchLikes();
         return;
-        // alert('Comment Posted Successfully');
       })
       .catch((error) => {
         console.log("Error: " + error);
@@ -306,12 +309,13 @@ const App = () => {
       .then((data) => {
         console.info("Info: (Posted Like Data) " + JSON.stringify(data));
 
+        fetchFeeds();
+        fetchComments();
         fetchLikes();
         return;
-        // alert('Comment Posted Successfully');
       })
       .catch((error) => {
-        console.log("Error: " + error);
+        console.error("Error: " + error);
         return;
       });
   };
@@ -347,7 +351,7 @@ const App = () => {
           setUserDetails(data);
           console.info("Info: (Returned Data) " + JSON.stringify(data));
         } else {
-          console.error("Error: Invalid Email and/or password");
+          console.warn("Warning: Invalid Email and/or password");
           alert("Invalid Email and/or password");
         }
       })
@@ -407,7 +411,7 @@ const App = () => {
           localStorage.setItem("isLoggedIn", "true");
           setLoggedInState(localStorage.getItem("isLoggedIn"));
 
-          console.info("AccessToken: " + data.accessToken);
+          console.info("Info (AccessToken): " + data.accessToken);
         } else {
           console.error("Error: " + data);
           alert(data);
