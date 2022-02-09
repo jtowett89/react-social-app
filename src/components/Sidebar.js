@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import FriendSingle from './FriendSingle';
+import FriendSingle from "./FriendSingle";
 
 const Sidebar = (props) => {
-  const [friendData, setFriendData] = useState([]);
-
   const populateData = () => {
     const allData = props.fetchedUsersData;
     const friends = props.userDetails.user.friends;
     let friendsArray = [];
+    console.log("Friends: " + props.userDetails.user.friends);
 
     friends.forEach((friend) => {
       const friendId = friend.friendId;
-      allData.forEach((item) => {
-        if (item.id === friendId) {
+      for (let i = 0; i < allData.length; i++) {
+        if (allData[i].id === friendId) {
           friendsArray.push(
             <FriendSingle
               showFriendFeeds={props.showFriendFeeds}
-              key={item.id}
-              friendId={item.id}
-              name={item.name}
-              photo={item.photo}
+              key={allData[i].id}
+              friendId={allData[i].id}
+              name={allData[i].name}
+              photo={allData[i].photo}
             />
           );
         }
-      });
+      }
     });
     // setFriendData(friendsArray);
     return friendsArray.map((single) => {
