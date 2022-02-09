@@ -363,30 +363,38 @@ const App = () => {
 
   //User registration
   const setRegistration = (name, email, password) => {
+    // let friendsArray = [];              /////////////////
+
+    // let allUsersData = allUsersData;
+
     let friendsData = [
       {
         id: 1,
-        friendId: 11
+        friendId: 55
       },
       {
         id: 2,
-        friendId: 12
+        friendId: 56
       },
       {
         id: 3,
-        friendId: 13
+        friendId: 57
       },
       {
         id: 4,
-        friendId: 14
+        friendId: 58
       },
       {
         id: 5,
-        friendId: 15
+        friendId: 59
       },
       {
         id: 6,
-        friendId: 16
+        friendId: 60
+      },
+      {
+        id: 6,
+        friendId: 61
       }
     ];
     console.log(JSON.stringify(friendsData));
