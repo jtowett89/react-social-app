@@ -48,7 +48,7 @@ const App = () => {
         photo: "http://justice.zerone.co.ke/images/user.jpg",
         friends: []
       }
-    }) && loggedInUserDetails === null
+    }) && loggedInUserDetails !== null
     ? (userId = JSON.parse(loggedInUserDetails).user.id)
     : (userId = 0);
 
