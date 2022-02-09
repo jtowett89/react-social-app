@@ -1,45 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import Login from './components/Login';
-import Navigation from './components/Navigation';
-import Profile from './components/Profile';
-import Newsfeed from './components/Newsfeed';
-// import SingleFeed from './components/SingleFeed';
-import Sidebar from './components/Sidebar';
-import Footer from './components/Footer';
-import './App.css';
-import loadingImg from './images/loader.gif';
+import React, { useState, useEffect } from "react";
+import Login from "./components/Login";
+import Navigation from "./components/Navigation";
+import Profile from "./components/Profile";
+import Newsfeed from "./components/Newsfeed";
+import Sidebar from "./components/Sidebar";
+import Footer from "./components/Footer";
+import "./App.css";
+import loadingImg from "./images/loader.gif";
 
 const App = () => {
-  // const apiKey = process.env.REACT_APP_ZERAKI_API_KEY;
-  let baseUrl = 'http://localhost:3004';
-  let userId;
-  if (localStorage.getItem('userDetails') !== '') {
-    userId = JSON.parse(localStorage.getItem('userDetails')).user.id;
-  } else {
-    userId = 1000000000000;
-  }
-
+  // start state variables
   const [fetchedUsersData, setFetchedUsersData] = useState({});
   const [fetchedFeedsData, setFetchedFeedsData] = useState([]);
-  const [loggedInState, setLoggedInState] = useState('false');
-  const [errorMsg, setErroroMsg] = useState(null);
+  const [loggedInState, setLoggedInState] = useState(null);
+  const [photo, setPhoto] = useState(
+    "http://justice.zerone.co.ke/images/user.jpg"
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [fetchedLikesData, setFetchedLikesData] = useState([]);
   const [fetchedCommentsData, setFetchedCommentsData] = useState([]);
+  const [allImages, setAllImages] = useState(null);
   const [userDetails, setUserDetails] = useState({
-    accessToken: '',
+    accessToken: "",
     user: {
-      id: 10000000000,
-      name: '',
-      email: '',
-      password: '',
-      photo: 'http://justice.zerone.co.ke/images/user.jpg',
+      id: 0,
+      name: "",
+      email: "",
+      password: "",
+      photo: "http://justice.zerone.co.ke/images/user.jpg",
       friends: [],
     },
   });
+  //end state variables
 
+  // let baseUrl = "http://localhost:3001";
+  let baseUrl = "https://zeraki-json-server-database.herokuapp.com";
+  let userId;
+  let loggedInUserDetails = localStorage.getItem("userDetails");
+  loggedInUserDetails !==
+    JSON.stringify({
+      accessToken: "",
+      user: {
+        id: 0,
+        name: "",
+        email: "",
+        password: "",
+        photo: "http://justice.zerone.co.ke/images/user.jpg",
+        friends: [],
+      },
+    }) && loggedInUserDetails === null
+    ? (userId = JSON.parse(loggedInUserDetails).user.id)
+    : (userId = 0);
+
+  //Show all feeds from everyone
   const showAllFeeds = () => {
-    fetch(baseUrl + '/feeds')
+    //Get feeds data
+    fetch(baseUrl + "/feeds")
       .then((res) => res.json())
       .then((returnedData) => {
         let data = returnedData.slice().sort((a, b) => b.id - a.id);
@@ -52,31 +68,30 @@ const App = () => {
         feedsArray.map((feedItem) => {
           filteredFeeds.push(feedItem);
         });
-        // userDetails.map((like) => {});
-        // filteredFeeds.map((feed) => {
-        //   if (feed) {
-        //   }
-        // });
+
         setFetchedFeedsData(filteredFeeds);
-        console.info('All Feeds Data: ' + JSON.stringify(feedsArray));
+        console.info("Info: (All Feeds Data) " + JSON.stringify(feedsArray));
         setIsLoading(false);
       })
       .catch((error) => {
-        setErroroMsg(error);
-        console.log('Error: ' + error);
+        console.error("Error: " + error);
       });
   };
 
+  //Showing feeds from a single friend
   const showFriendFeeds = (id) => {
-    document.getElementById('sidebar').classList.remove('no-left');
+    document.getElementById("sidebar").classList.remove("no-left"); //hide sidebar for mobile
+
     document
-      .getElementById('newsfeed')
-      .scrollIntoView({ block: 'start', behavior: 'smooth' });
-    fetch(baseUrl + '/feeds')
+      .getElementById("newsfeed")
+      .scrollIntoView({ block: "start", behavior: "smooth" }); //scroll to newsfeed section in mobile
+
+    //Get feeds data
+    fetch(baseUrl + "/feeds")
       .then((res) => res.json())
       .then((returnedData) => {
         let data = returnedData.slice().sort((a, b) => b.id - a.id);
-        console.log('OwnerID: ' + data.ownerId);
+        console.log("OwnerID: " + data.ownerId);
         let feedsArray = [];
         let filteredFeeds = [];
         for (var i in data) feedsArray.push(data[i]);
@@ -84,72 +99,269 @@ const App = () => {
           feedItem.ownerId === id && filteredFeeds.push(feedItem);
         });
         setFetchedFeedsData(filteredFeeds);
-        console.info("All Friend's Feeds Data: " + JSON.stringify(feedsArray));
+        console.info(
+          "Info : (All Friend's Feeds Data) " + JSON.stringify(feedsArray)
+        );
         setIsLoading(false);
       })
       .catch((error) => {
-        setErroroMsg(error);
-        console.log('Error: ' + error);
+        console.error("Error: " + error);
       });
   };
 
-  const postComment = () => {};
-
-  const handleComment = (e) => {
-    e.preventDefault();
-    postComment();
+  //Get random user images
+  const fetchPics = () => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((response) => response.json())
+      .then((data) => {
+        let randomPics = data;
+        setAllImages(data);
+        console.log("Random Pics: " + JSON.stringify(data));
+        let userPhoto =
+          randomPics.data.memes[
+            Math.floor(Math.random() * randomPics.data.memes.length)
+          ].url;
+        setPhoto(userPhoto);
+        console.log("Random Pic is: " + userPhoto);
+      });
   };
 
+  //Fetch Users
+  const fetchUsers = () => {
+    fetch(baseUrl + "/users")
+      .then((res) => res.json())
+      .then((returnedData) => {
+        let data = returnedData.slice().sort((a, b) => b.id - a.id);
+        setFetchedUsersData(data);
+        console.info("Info: " + fetchedUsersData);
+
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error: " + error);
+      });
+  };
+
+  //Get Feeds
+  const fetchFeeds = () => {
+    fetch(baseUrl + "/feeds")
+      .then((res) => res.json())
+      .then((returnedData) => {
+        let data = returnedData.slice().sort((a, b) => b.id - a.id);
+        setFetchedFeedsData(JSON.parse(JSON.stringify(data)));
+        console.info("Info: " + fetchedFeedsData);
+
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error: " + error);
+      });
+  };
+
+  //Get comments
+  const fetchComments = () => {
+    fetch(baseUrl + "/comments")
+      .then((res) => res.json())
+      .then((returnedData) => {
+        let data = returnedData.slice().sort((a, b) => b.id - a.id);
+        setFetchedCommentsData(data);
+        console.info(
+          "Info: (Comments Data Returned) " +
+            JSON.stringify(fetchedCommentsData)
+        );
+
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log("Error: " + error);
+      });
+  };
+
+  //Get likes
+  const fetchLikes = () => {
+    fetch(baseUrl + "/likes")
+      .then((res) => res.json())
+      .then((returnedData) => {
+        let data = returnedData.slice().sort((a, b) => b.id - a.id);
+        setFetchedLikesData(JSON.parse(JSON.stringify(data)));
+        console.info("Info: " + fetchedLikesData);
+
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error: " + error);
+      });
+  };
+
+  //Post Feed
+  const postFeed = (currentUserId, feed) => {
+    fetch(baseUrl + "/feeds", {
+      method: "POST",
+      body: JSON.stringify({
+        ownerId: currentUserId,
+        feed: feed,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Returned Data: " + data);
+        fetchFeeds();
+        return;
+      })
+      .catch((error) => {
+        console.log("Error: " + error);
+        return;
+      });
+  };
+
+  //Post a comment
+  const postComment = (
+    e,
+    commentString,
+    feedId,
+    currentUserId,
+    ownerName,
+    currentUserName,
+    feed
+  ) => {
+    postFeed(currentUserId, feed);
+
+    fetch(baseUrl + "/comments", {
+      method: "POST",
+      body: JSON.stringify({
+        ownerId: currentUserId,
+        comment: commentString,
+        feedId: feedId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.info("Info: (Posted Comment Data) " + JSON.stringify(data));
+
+        fetchComments();
+        return;
+        // alert('Comment Posted Successfully');
+      })
+      .catch((error) => {
+        console.log("Error: " + error);
+        return;
+      });
+  };
+
+  const handleComment = (
+    e,
+    commentString,
+    feedId,
+    currentUserId,
+    ownerName,
+    currentUserName
+  ) => {
+    e.preventDefault();
+    let feed = currentUserName + " commented on " + ownerName + "'s feed";
+    if (commentString.length < 2) {
+      alert("Your comment needs at least 2 characters");
+      return;
+    }
+    postComment(
+      e,
+      commentString,
+      feedId,
+      currentUserId,
+      ownerName,
+      currentUserName,
+      feed
+    );
+
+    alert("Comment Posted Successfully");
+  };
+
+  //Like a post
+  const postLike = (
+    e,
+    feedId,
+    currentUserId,
+    ownerName,
+    currentUserName,
+    feed
+  ) => {
+    postFeed(currentUserId, feed);
+
+    fetch(baseUrl + "/likes", {
+      method: "POST",
+      body: JSON.stringify({
+        likerId: currentUserId,
+        feedId: feedId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.info("Info: (Posted Like Data) " + JSON.stringify(data));
+
+        fetchLikes();
+        return;
+        // alert('Comment Posted Successfully');
+      })
+      .catch((error) => {
+        console.log("Error: " + error);
+        return;
+      });
+  };
+
+  const handleLike = (e, feedId, currentUserId, ownerName, currentUserName) => {
+    e.preventDefault();
+    let feed = currentUserName + " liked " + ownerName + "'s feed";
+    postLike(e, feedId, currentUserId, ownerName, currentUserName, feed);
+
+    alert("Feed Liked Successfully");
+  };
+
+  //Login
   const setLogin = (email, password) => {
-    fetch('http://localhost:3004/login', {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'default',
+    //Authenticate Login credentials
+    fetch(baseUrl + "/login", {
+      method: "POST",
+      mode: "cors",
+      cache: "default",
       body: JSON.stringify({
         email: email,
         password: password,
       }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.user.email !== '') {
-          localStorage.setItem('isLoggedIn', 'true');
-          setLoggedInState(localStorage.getItem('isLoggedIn'));
-          localStorage.setItem('userDetails', JSON.stringify(data));
+        if (data.user.email !== "") {
+          localStorage.setItem("isLoggedIn", "true");
+          setLoggedInState(localStorage.getItem("isLoggedIn"));
+          localStorage.setItem("userDetails", JSON.stringify(data));
           setUserDetails(data);
-          console.log('Returned Data: ' + JSON.stringify(data));
+          console.info("Info: (Returned Data) " + JSON.stringify(data));
         } else {
-          console.error('Error: ' + JSON.stringify(data));
-          alert('Invalid Email and/or password');
+          console.error("Error: Invalid Email and/or password");
+          alert("Invalid Email and/or password");
         }
       })
       .catch((error) => {
-        alert('Invalid Email and/or password');
-        console.error('Error: ' + error);
+        alert("Invalid Email and/or password");
+        console.error("Error: " + error);
       });
   };
 
+  //User registration
   const setRegistration = (name, email, password) => {
-    let photo = 'http://justice.zerone.co.ke/images/user.jpg';
-
-    let randomPics = [];
-
-    const fetchPics = () => {
-      fetch('https://api.imgflip.com/get_memes') //call to URL
-        .then((response) => response.json()) //turn promise into JS object
-        .then((data) => {
-          randomPics.push(data);
-          let myArray = randomPics.data.memes;
-          photo = myArray[Math.floor(Math.random() * myArray.length)].url;
-        });
-    };
-    fetchPics();
-
-    const request = fetch(baseUrl + '/register', {
-      method: 'POST',
+    const request = fetch(baseUrl + "/register", {
+      method: "POST",
       body: JSON.stringify({
         name: name,
         email: email,
@@ -158,130 +370,121 @@ const App = () => {
         friends: [],
       }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.user.email !== '') {
+        if (data.user.email !== "") {
           console.log(data.user.email);
-          localStorage.setItem('isLoggedIn', 'true');
-          setLoggedInState(localStorage.getItem('isLoggedIn'));
-          localStorage.setItem('userDetails', JSON.stringify(data));
+          localStorage.setItem("isLoggedIn", "true");
+          setLoggedInState(localStorage.getItem("isLoggedIn"));
+          localStorage.setItem("userDetails", JSON.stringify(data));
           setUserDetails(data);
 
-          console.info('AccessToken: ' + data.accessToken);
+          console.info("AccessToken: " + data.accessToken);
         } else {
-          console.error('Error: ' + data);
+          console.error("Error: " + data);
         }
       })
       .catch((error) => {
-        console.log('Error: ' + error);
+        console.log("Error: " + error);
       });
 
-    console.log('The request: ' + request);
+    console.log("The request: " + request);
   };
 
   const setLogout = () => {
-    localStorage.setItem('isLoggedIn', 'false');
-    localStorage.setItem('userDetails', '');
-    setLoggedInState(localStorage.getItem('isLoggedIn'));
-    // console.log(loggedInState);
+    localStorage.setItem("isLoggedIn", "false");
+    setLoggedInState(localStorage.getItem("isLoggedIn"));
+    localStorage.setItem(
+      "userDetails",
+      JSON.stringify({
+        accessToken: "",
+        user: {
+          id: 0,
+          name: "",
+          email: "",
+          password: "",
+          photo: "http://justice.zerone.co.ke/images/user.jpg",
+          friends: [],
+        },
+      })
+    );
+    setUserDetails({
+      accessToken: "",
+      user: {
+        id: 0,
+        name: "",
+        email: "",
+        password: "",
+        photo: "http://justice.zerone.co.ke/images/user.jpg",
+        friends: [],
+      },
+    });
   };
+
+  //show and hide friends on mobole
   const showFriends = () => {
-    document.getElementById('sidebar').classList.add('no-left');
+    document.getElementById("sidebar").classList.add("no-left");
   };
   const hideFriends = () => {
-    document.getElementById('sidebar').classList.remove('no-left');
+    document.getElementById("sidebar").classList.remove("no-left");
   };
 
   useEffect(() => {
-    setLoggedInState(localStorage.getItem('isLoggedIn'));
-    const personDetails = localStorage.getItem('userDetails');
-    console.log('Current Details: ' + personDetails); //////////////////
-    if (personDetails !== '') {
-      setUserDetails(JSON.parse(personDetails)); //set user details on load
-    } else {
-      setUserDetails({
-        accessToken: '',
+    setLoggedInState(localStorage.getItem("isLoggedIn"));
+    const personDetails = localStorage.getItem("userDetails");
+    console.log("Current Details: " + personDetails);
+
+    //set user details on load
+    if (
+      personDetails !==
+      JSON.stringify({
+        accessToken: "",
         user: {
-          name: '',
-          email: '',
-          password: '',
-          photo: 'http://www.musicteacher.info/user/img/default/user.png',
+          id: 0,
+          name: "",
+          email: "",
+          password: "",
+          photo: "http://justice.zerone.co.ke/images/user.jpg",
           friends: [],
         },
-      });
+      })
+    ) {
+      setUserDetails(JSON.parse(personDetails));
     }
-
-    fetch(baseUrl + '/users')
-      .then((res) => res.json())
-      .then((returnedData) => {
-        let data = returnedData.slice().sort((a, b) => b.id - a.id);
-        setFetchedUsersData(JSON.parse(JSON.stringify(data)));
-        console.info('Info: ' + fetchedUsersData);
-
-        // setIsLoading(false);
-      })
-      .catch((error) => {
-        setErroroMsg(error);
-        console.log('Error: ' + error);
-      });
-
-    fetch(baseUrl + '/feeds')
-      .then((res) => res.json())
-      .then((returnedData) => {
-        let data = returnedData.slice().sort((a, b) => b.id - a.id);
-        setFetchedFeedsData(JSON.parse(JSON.stringify(data)));
-        console.info('Info: ' + fetchedFeedsData);
-
-        // setIsLoading(false);
-      })
-      .catch((error) => {
-        setErroroMsg(error);
-        console.log('Error: ' + error);
-      });
-
-    fetch(baseUrl + '/likes')
-      .then((res) => res.json())
-      .then((returnedData) => {
-        let data = returnedData.slice().sort((a, b) => b.id - a.id);
-        setFetchedLikesData(JSON.parse(JSON.stringify(data)));
-        console.info('Info: ' + fetchedLikesData);
-
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setErroroMsg(error);
-        console.log('Error: ' + error);
-      });
-
-    fetch(baseUrl + '/comments')
-      .then((res) => res.json())
-      .then((returnedData) => {
-        let data = returnedData.slice().sort((a, b) => b.id - a.id);
-        setFetchedCommentsData(JSON.parse(JSON.stringify(data)));
-        console.info('Info: ' + fetchedCommentsData);
-
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setErroroMsg(error);
-        console.log('Error: ' + error);
-      });
+    fetchUsers();
+    fetchFeeds();
+    fetchComments();
+    fetchLikes();
+    fetchPics();
   }, []);
   return (
     <>
       {isLoading ? (
         <div
           className="loading"
-          style={{ position: 'absolute', display: isLoading ? 'flex' : 'none' }}
+          style={{ position: "absolute", display: isLoading ? "flex" : "none" }}
         >
           <img src={loadingImg} alt="" />
         </div>
       ) : (
         <>
-          {loggedInState === 'true' ? (
+          {loggedInState === "true" &&
+          userDetails !==
+            {
+              accessToken: "",
+              user: {
+                id: 0,
+                name: "",
+                email: "",
+                password: "",
+                photo: "http://justice.zerone.co.ke/images/user.jpg",
+                friends: [],
+              },
+            } &&
+          userDetails !== null ? (
             <>
               <Navigation
                 userDetails={userDetails}
@@ -296,6 +499,7 @@ const App = () => {
                 />
                 <Newsfeed
                   handleComment={handleComment}
+                  handleLike={handleLike}
                   userDetails={userDetails}
                   allUsers={fetchedUsersData}
                   newsFeedData={fetchedFeedsData}

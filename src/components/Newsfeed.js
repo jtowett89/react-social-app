@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import SingleFeed from './SingleFeed';
+// import React, { useState, useEffect } from 'react';
+import SingleFeed from "./SingleFeed";
 
 const Newsfeed = (props) => {
   let feedsData = props.newsFeedData;
-  console.log('Feeds Data Newsfeed Component' + feedsData);
+  console.log("Feeds Data Newsfeed Component" + feedsData);
   return (
     <div id="newsfeed" className="newsfeed component-padding">
       <div className="newsfeed-content">
         <h2 className="newsfeed-heading">
           <span>
             <i className="fa fa-comments-o"></i> News Feed
-          </span>{' '}
+          </span>{" "}
           <button onClick={props.showAll} className="newsfeed-btn ml-auto">
-            <i className="fa fa-refresh"></i> Show All Feeds
+            <i className="fa fa-refresh"></i> Show All
           </button>
         </h2>
         {feedsData.map((feed) => {
           return (
             <SingleFeed
               handleComment={props.handleComment}
+              handleLike={props.handleLike}
               key={feed.id}
               ownerId={feed.ownerId}
               feed={feed.feed}

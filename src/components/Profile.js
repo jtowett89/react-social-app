@@ -1,27 +1,27 @@
+import React, { useState, useEffect } from 'react';
 const Profile = (props) => {
+  const [photo, setPhoto] = useState(
+    'https://justice.zerone.co.ke/images/user.jpg'
+  );
+  useEffect(() => {
+    setPhoto(props.userDetails.user.photo);
+  });
   return (
     <div className="profile component-padding">
       <div className="profile-content">
-        {props.userDetails.user.email !== '' ? (
+        {props.userDetails.user.email !== null ? (
           <>
             <div className="prof-pic">
-              <img
-                src={
-                  props.userDetails.user.photo !== undefined
-                    ? props.userDetails.user.photo
-                    : 'http://www.musicteacher.info/user/img/default/user.png'
-                }
-                alt=""
-              />
+              <img src={photo} alt="" />
             </div>
             <div className="details">
               <h1>
-                {props.userDetails.user.name !== undefined
+                {props.userDetails.user.name !== null
                   ? props.userDetails.user.name
                   : ''}
               </h1>
               <p>
-                {props.userDetails.user.email !== undefined
+                {props.userDetails.user.email !== null
                   ? props.userDetails.user.email
                   : ''}
               </p>
@@ -32,7 +32,7 @@ const Profile = (props) => {
         )}
         <div className="profile-foot">
           <button onClick={props.setLogout} className="logout-btn">
-            <i className="fa fa-sign-out"></i> Sign Out
+            <i className="fa fa-sign-out"></i> Log Out
           </button>
           <button
             onClick={props.showFriends}

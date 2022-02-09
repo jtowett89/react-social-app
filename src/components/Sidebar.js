@@ -9,9 +9,6 @@ const Sidebar = (props) => {
     const friends = props.userDetails.user.friends;
     let friendsArray = [];
 
-    // console.log('Fetched Users Data: ' + JSON.stringify(allData));
-    // console.log('Friends: ' + JSON.stringify(friends));
-
     friends.forEach((friend) => {
       const friendId = friend.friendId;
       allData.forEach((item) => {

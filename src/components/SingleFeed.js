@@ -1,34 +1,45 @@
 // import thumb from '../images/ppic.png';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+// import ReactHtmlParser from 'react-html-parser';
 
 const SingleFeed = (props) => {
   let allUsers = props.allUsers;
   let feedOwnerId = props.ownerId;
   let feedId = props.feedId;
+  let currentUserId = props.currentUser.user.id;
+  let currentUserName = props.currentUser.user.name;
 
   const [ownerId, setOwnerId] = useState(10000000000);
   const [comments, setComments] = useState([]);
-  const [commentInputState, setCommentInputState] = useState('');
-  const [userName, setUserName] = useState('');
+  const [commentInputState, setCommentInputState] = useState("");
+  const [userName, setUserName] = useState("");
   const [feedLikes, setFeedLikes] = useState(0);
   const [feedCommentsNumber, setFeedCommentsNumber] = useState(0);
   const [ownerPhoto, setOwnerPhoto] = useState(
-    'http://justice.zerone.co.ke/images/user.jpg'
+    "http://justice.zerone.co.ke/images/user.jpg"
   );
-  const [likes, setLikes] = useState(0);
+  const [ownerName, setOwnerName] = useState("");
 
   let likesCount = 0;
   let commentsCount = 0;
   let commentStrings = [];
 
-  const userPhoto = () => {
+  const ownerPhotoString = () => {
     allUsers.map((user) => {
       if (user.id === feedOwnerId) {
         setOwnerPhoto(user.photo);
-        console.log(user.phpto);
       }
     });
   };
+
+  const ownerNameString = () => {
+    allUsers.map((user) => {
+      if (user.id === feedOwnerId) {
+        setOwnerName(user.name);
+      }
+    });
+  };
+
   const currentLikes = () => {
     props.likes.map((like) => {
       if (like.feedId === feedId) {
@@ -37,10 +48,19 @@ const SingleFeed = (props) => {
     });
     setFeedLikes(likesCount);
   };
+
   const currentCommentsNumber = () => {
     props.comments.map((comment) => {
+      let ownerID = comment.ownerId;
+      let parser = new DOMParser();
       if (comment.feedId === feedId) {
-        commentStrings.push(comment.comment);
+        let commentOwner = "";
+        allUsers.map((user) => {
+          if (user.id === ownerID) {
+            commentOwner = user.name;
+          }
+        });
+        commentStrings.push(commentOwner + ": " + comment.comment);
         commentsCount++;
       }
     });
@@ -49,32 +69,47 @@ const SingleFeed = (props) => {
   };
 
   const handleChange = (e) => {
-    e.target.name === 'comment' && setCommentInputState(e.target.value);
+    e.target.name === "comment" && setCommentInputState(e.target.value);
   };
 
   useEffect(() => {
     setOwnerId(feedOwnerId);
-    userPhoto();
+    ownerPhotoString();
+    ownerNameString();
     currentLikes();
     currentCommentsNumber();
+    setUserName(currentUserName);
   }, []);
   return (
     <div className="newsfeed-single">
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <img className="feed-thumb" src={ownerPhoto} alt="" />
       </div>
-      <div style={{ width: '100%' }}>
+      <div style={{ width: "100%" }}>
         <div className="newsfeed-body">
           <p>{props.feed}</p>
         </div>
         <div className="newsfeed-controls">
-          <a className="like-btn">
+          <a
+            className="like-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              props.handleLike(
+                e,
+                feedId,
+                currentUserId,
+                ownerName,
+                currentUserName
+              );
+              currentLikes();
+            }}
+          >
             <i className="fa fa-thumbs-up"></i> {feedLikes}
           </a>
           <a className="comment-btn">
@@ -82,24 +117,51 @@ const SingleFeed = (props) => {
           </a>
           <br />
           <br />
-          <div style={{ marginLeft: '1.5em', width: 'calc(100%-1.5em)' }}>
-            <small style={{ marginBottom: '.8em' }} className="zeraki-blue">
-              <b>Comments</b>
-            </small>
-            <br />
-            {comments.map((comment) => {
-              return <p>{comment}</p>;
+          <div style={{ marginLeft: "1.5em", width: "calc(100%-1.5em)" }}>
+            {comments.length > 0 ? (
+              <>
+                <p style={{ marginBottom: "-0.5em" }}>
+                  <small className="zeraki-blue">
+                    <b>Comments</b>
+                  </small>
+                </p>
+                <br />
+              </>
+            ) : (
+              ""
+            )}
+
+            {comments.map((comment, index) => {
+              return (
+                <p id={index} style={{ marginBottom: "1em" }} key={index}>
+                  {comment}
+                </p>
+              );
             })}
           </div>
           <br />
           <br />
-          <form onSubmit={props.handleComment} style={{ display: 'inline' }}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              props.handleComment(
+                e,
+                commentInputState,
+                feedId,
+                currentUserId,
+                ownerName,
+                currentUserName
+              );
+            }}
+            style={{ display: "inline" }}
+          >
             <input
               style={{
-                width: '75% ',
-                borderBottomRightRadius: '0px ',
-                borderTopRightRadius: '0px ',
+                width: "75% ",
+                borderBottomRightRadius: "0px ",
+                borderTopRightRadius: "0px ",
               }}
+              placeholder="Comment..."
               onChange={handleChange}
               name="comment"
               type="text"
@@ -108,15 +170,15 @@ const SingleFeed = (props) => {
             <button
               className="logout-btn"
               style={{
-                borderBottomLeftRadius: '0px ',
-                borderTopLeftRadius: '0px ',
-                fontSize: '1em',
-                marginLeft: '0%',
-                width: '25%',
-                height: '3em',
-                marginBottom: '0 !important',
-                paddingRight: '0.5em',
-                paddingLeft: '0.5em',
+                borderBottomLeftRadius: "0px ",
+                borderTopLeftRadius: "0px ",
+                fontSize: "1em",
+                marginLeft: "0%",
+                width: "25%",
+                height: "3em",
+                marginBottom: "0 !important",
+                paddingRight: "0.5em",
+                paddingLeft: "0.5em",
               }}
             >
               <i className="fa fa-send"></i>

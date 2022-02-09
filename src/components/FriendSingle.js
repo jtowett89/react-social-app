@@ -7,7 +7,7 @@ const FriendSingle = (props) => {
       }}
       className="friend-single"
     >
-      <img src={props.photo} alt="" />
+      <img style={{ height: '3em', width: '3em' }} src={props.photo} alt="" />
       <p>{props.name}</p>
     </div>
   );
