@@ -410,10 +410,12 @@ const App = () => {
           console.info("AccessToken: " + data.accessToken);
         } else {
           console.error("Error: " + data);
+          alert(data);
         }
       })
       .catch((error) => {
         console.log("Error: " + error);
+        alert("Email already in use");
       });
 
     console.log("The request: " + request);
