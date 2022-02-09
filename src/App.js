@@ -33,7 +33,7 @@ const App = () => {
   });
   //end state variables
 
-  // let baseUrl = "http://localhost:3001";
+  // let baseUrl = "http://localhost:3004";
   let baseUrl = "https://zeraki-json-server-database.herokuapp.com";
   let userId;
   let loggedInUserDetails = localStorage.getItem("userDetails");
@@ -329,7 +329,6 @@ const App = () => {
     //Authenticate Login credentials
     fetch(baseUrl + "/login", {
       method: "POST",
-      mode: "cors",
       cache: "default",
       body: JSON.stringify({
         email: email,
