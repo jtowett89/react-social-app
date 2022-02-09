@@ -34,7 +34,7 @@ const App = () => {
   //end state variables
 
   // let baseUrl = "http://localhost:3001";
-  let baseUrl = "https://zeraki-json-server-database.herokuapp.com";
+  let baseUrl = process.env.API_BASE_URL;
   let userId;
   let loggedInUserDetails = localStorage.getItem("userDetails");
   loggedInUserDetails !==
