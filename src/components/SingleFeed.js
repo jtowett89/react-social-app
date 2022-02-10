@@ -104,6 +104,7 @@ const SingleFeed = (props) => {
                 ownerName,
                 currentUserName
               );
+              setFeedLikes(feedLikes + 1);
               currentLikes();
             }}
           >
@@ -147,6 +148,7 @@ const SingleFeed = (props) => {
                 ownerName,
                 currentUserName
               );
+              setFeedCommentsNumber(feedCommentsNumber + 1);
             }}
             style={{ display: "inline" }}
           >

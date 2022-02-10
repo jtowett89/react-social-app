@@ -14,12 +14,14 @@ const Login = (props) => {
   const [loader, setLoader] = useState(false);
   const [loginOrRegistration, setLoginOrRegistration] = useState("login");
 
+  //Toggle between login and registration forms
   const toggleForms = () => {
     setLoginOrRegistration(
       loginOrRegistration === "login" ? "registration" : "login"
     );
   };
 
+  //input values for input fields
   const handleChange = (e) => {
     const [name, email, password] = e.target.name;
 
