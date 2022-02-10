@@ -1,6 +1,4 @@
-// import thumb from '../images/ppic.png';
 import React, { useState, useEffect } from "react";
-// import ReactHtmlParser from 'react-html-parser';
 
 const SingleFeed = (props) => {
   let allUsers = props.allUsers;
@@ -52,7 +50,6 @@ const SingleFeed = (props) => {
   const currentCommentsNumber = () => {
     props.comments.map((comment) => {
       let ownerID = comment.ownerId;
-      let parser = new DOMParser();
       if (comment.feedId === feedId) {
         let commentOwner = "";
         allUsers.map((user) => {

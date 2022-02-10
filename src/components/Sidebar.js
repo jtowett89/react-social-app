@@ -23,7 +23,6 @@ const Sidebar = (props) => {
         }
       }
     });
-    // setFriendData(friendsArray);
     return friendsArray.map((single) => {
       return single;
     });
