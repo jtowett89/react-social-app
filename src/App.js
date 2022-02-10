@@ -33,8 +33,8 @@ const App = () => {
   });
   //end state variables
 
-  // let baseUrl = "http://localhost:3004";
-  let baseUrl = "https://zeraki-json-server-database.herokuapp.com";
+  let baseUrl = "http://localhost:3004";
+  // let baseUrl = "https://zeraki-json-server-database.herokuapp.com";
   let userId;
   let loggedInUserDetails = localStorage.getItem("userDetails");
   loggedInUserDetails !==

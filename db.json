@@ -339,6 +339,16 @@
       "ownerId": 63,
       "feed": "Matthew Mwangi commented on Khloe Joan's feed",
       "id": 12
+    },
+    {
+      "ownerId": 1,
+      "feed": "Justice Towett liked Matthew Mwangi's feed",
+      "id": 13
+    },
+    {
+      "ownerId": 1,
+      "feed": "Justice Towett liked Matthew Mwangi's feed",
+      "id": 14
     }
   ],
   "likes": [
@@ -376,6 +386,16 @@
       "likerId": 1,
       "feedId": 2,
       "id": 9
+    },
+    {
+      "likerId": 1,
+      "feedId": 12,
+      "id": 10
+    },
+    {
+      "likerId": 1,
+      "feedId": 12,
+      "id": 11
     }
   ],
   "comments": [
