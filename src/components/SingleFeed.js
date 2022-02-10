@@ -97,6 +97,7 @@ const SingleFeed = (props) => {
             className="like-btn"
             onClick={(e) => {
               e.preventDefault();
+              setFeedLikes(feedLikes + 1);
               props.handleLike(
                 e,
                 feedId,
@@ -104,7 +105,6 @@ const SingleFeed = (props) => {
                 ownerName,
                 currentUserName
               );
-              setFeedLikes(feedLikes + 1);
               currentLikes();
             }}
           >
@@ -140,6 +140,7 @@ const SingleFeed = (props) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              setFeedCommentsNumber(feedCommentsNumber + 1);
               props.handleComment(
                 e,
                 commentInputState,
@@ -148,7 +149,6 @@ const SingleFeed = (props) => {
                 ownerName,
                 currentUserName
               );
-              setFeedCommentsNumber(feedCommentsNumber + 1);
             }}
             style={{ display: "inline" }}
           >
