@@ -105,7 +105,6 @@ const SingleFeed = (props) => {
                 ownerName,
                 currentUserName
               );
-              setTimeout(currentLikes(), 5000);
             }}
           >
             <i className="fa fa-thumbs-up"></i> {feedLikes}
