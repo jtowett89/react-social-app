@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 const Profile = (props) => {
   const [photo, setPhoto] = useState(
-    'https://justice.zerone.co.ke/images/user.jpg'
+    "https://justice.zerone.co.ke/images/user.jpg"
   );
   useEffect(() => {
     setPhoto(props.userDetails.user.photo);
-  });
+  }, props.userDetails.user.photo);
   return (
     <div className="profile component-padding">
       <div className="profile-content">
@@ -18,17 +18,17 @@ const Profile = (props) => {
               <h1>
                 {props.userDetails.user.name !== null
                   ? props.userDetails.user.name
-                  : ''}
+                  : ""}
               </h1>
               <p>
                 {props.userDetails.user.email !== null
                   ? props.userDetails.user.email
-                  : ''}
+                  : ""}
               </p>
             </div>
           </>
         ) : (
-          ''
+          ""
         )}
         <div className="profile-foot">
           <button onClick={props.setLogout} className="logout-btn">
