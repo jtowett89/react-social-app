@@ -17,6 +17,7 @@ const SingleFeed = (props) => {
     "http://justice.zerone.co.ke/images/user.jpg"
   );
   const [ownerName, setOwnerName] = useState("");
+  const [liked, setLiked] = useState(false);
 
   let likesCount = 0;
   let commentsCount = 0;
@@ -97,7 +98,11 @@ const SingleFeed = (props) => {
             className="like-btn"
             onClick={(e) => {
               e.preventDefault();
-              setFeedLikes(feedLikes + 1);
+              if (liked) {
+                setFeedLikes(feedLikes + 1);
+              }
+              setLiked(true);
+
               props.handleLike(
                 e,
                 feedId,
