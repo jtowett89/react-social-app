@@ -98,7 +98,7 @@ const SingleFeed = (props) => {
             className="like-btn"
             onClick={(e) => {
               e.preventDefault();
-              if (liked) {
+              if (!liked) {
                 setFeedLikes(feedLikes + 1);
               }
               setLiked(true);
