@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 const Profile = (props) => {
   const [photo, setPhoto] = useState(
-    "https://justice.zerone.co.ke/images/user.jpg"
+    "http://joeto.zerone.co.ke/images/user.jpg"
   );
   useEffect(() => {
     setPhoto(props.userDetails.user.photo);
