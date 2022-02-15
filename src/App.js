@@ -13,13 +13,9 @@ const App = () => {
   const [fetchedUsersData, setFetchedUsersData] = useState({});
   const [fetchedFeedsData, setFetchedFeedsData] = useState([]);
   const [loggedInState, setLoggedInState] = useState(null);
-  const [photo, setPhoto] = useState(
-    "http://justice.zerone.co.ke/images/user.jpg"
-  );
   const [isLoading, setIsLoading] = useState(true);
   const [fetchedLikesData, setFetchedLikesData] = useState([]);
   const [fetchedCommentsData, setFetchedCommentsData] = useState([]);
-  const [allImages, setAllImages] = useState(null);
   const [userDetails, setUserDetails] = useState({
     accessToken: "",
     user: {
@@ -27,7 +23,7 @@ const App = () => {
       name: "",
       email: "",
       password: "",
-      photo: "http://justice.zerone.co.ke/images/user.jpg",
+      photo: "http://joeto.zerone.co.ke/images/user.jpg",
       friends: []
     }
   });

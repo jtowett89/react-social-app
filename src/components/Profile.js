@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
 const Profile = (props) => {
-  const [photo, setPhoto] = useState(
-    "http://joeto.zerone.co.ke/images/user.jpg"
-  );
-  useEffect(() => {
-    setTimeout(setPhoto(props.userDetails.user.photo), 2000);
-  }, []);
   return (
     <div className="profile component-padding">
       <div className="profile-content">
-        {props.userDetails.user.email !== null ? (
+        {props.userDetails.user.email !== null && (
           <>
             <div className="prof-pic">
-              <img src={photo} alt="" />
+              <img src={props.userDetails.user.photo} alt="" />
             </div>
             <div className="details">
               <h1>
@@ -27,8 +21,6 @@ const Profile = (props) => {
               </p>
             </div>
           </>
-        ) : (
-          ""
         )}
         <div className="profile-foot">
           <button onClick={props.setLogout} className="logout-btn">
