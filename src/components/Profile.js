@@ -5,7 +5,7 @@ const Profile = (props) => {
   );
   useEffect(() => {
     setPhoto(props.userDetails.user.photo);
-  }, props.userDetails.user.photo);
+  }, []);
   return (
     <div className="profile component-padding">
       <div className="profile-content">
