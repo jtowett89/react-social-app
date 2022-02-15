@@ -100,16 +100,15 @@ const SingleFeed = (props) => {
               e.preventDefault();
               if (!liked) {
                 setFeedLikes(feedLikes + 1);
+                props.handleLike(
+                  e,
+                  feedId,
+                  currentUserId,
+                  ownerName,
+                  currentUserName
+                );
               }
               setLiked(true);
-
-              props.handleLike(
-                e,
-                feedId,
-                currentUserId,
-                ownerName,
-                currentUserName
-              );
             }}
           >
             <i className="fa fa-thumbs-up"></i> {feedLikes}
