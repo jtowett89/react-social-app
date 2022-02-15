@@ -13,6 +13,9 @@ const App = () => {
   const [fetchedUsersData, setFetchedUsersData] = useState({});
   const [fetchedFeedsData, setFetchedFeedsData] = useState([]);
   const [loggedInState, setLoggedInState] = useState(null);
+  const [photo, setPhoto] = useState(
+    "http://joeto.zerone.co.ke/images/user.jpg"
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [fetchedLikesData, setFetchedLikesData] = useState([]);
   const [fetchedCommentsData, setFetchedCommentsData] = useState([]);
@@ -111,7 +114,6 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         let randomPics = data;
-        setAllImages(data);
         console.log("Random Pics: " + JSON.stringify(data));
         let userPhoto =
           randomPics.data.memes[
