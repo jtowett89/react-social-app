@@ -4,7 +4,7 @@ const Profile = (props) => {
     "http://joeto.zerone.co.ke/images/user.jpg"
   );
   useEffect(() => {
-    setPhoto(props.userDetails.user.photo);
+    setTimeout(setPhoto(props.userDetails.user.photo), 2000);
   }, []);
   return (
     <div className="profile component-padding">
