@@ -517,7 +517,7 @@ const App = () => {
                 name: "",
                 email: "",
                 password: "",
-                photo: "http://justice.zerone.co.ke/images/user.jpg",
+                photo: "http://joeto.zerone.co.ke/images/user.jpg",
                 friends: []
               }
             } &&

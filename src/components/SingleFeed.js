@@ -18,10 +18,18 @@ const SingleFeed = (props) => {
   );
   const [ownerName, setOwnerName] = useState("");
   const [liked, setLiked] = useState(false);
+  const [newComments, setNewComments] = useState([]);
 
   let likesCount = 0;
   let commentsCount = 0;
   let commentStrings = [];
+
+  const showNewComments = (comment, userName) => {
+    let commentNew = [];
+    commentNew.push(userName + ": " + comment);
+    setNewComments(commentNew);
+    setCommentInputState("");
+  };
 
   const ownerPhotoString = () => {
     allUsers.map((user) => {
@@ -129,6 +137,13 @@ const SingleFeed = (props) => {
                 <br />
               </>
             )}
+            {newComments.map((comment, index) => {
+              return (
+                <p style={{ marginBottom: "1em" }} key={index}>
+                  {comment}
+                </p>
+              );
+            })}
 
             {comments.map((comment, index) => {
               return (
@@ -152,6 +167,7 @@ const SingleFeed = (props) => {
                 ownerName,
                 currentUserName
               );
+              showNewComments(commentInputState, currentUserName, e);
             }}
             style={{ display: "inline" }}
           >
