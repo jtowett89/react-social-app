@@ -24,8 +24,9 @@ const SingleFeed = (props) => {
   let commentsCount = 0;
   let commentStrings = [];
 
+  let commentNew = [];
+
   const showNewComments = (comment, userName) => {
-    let commentNew = [];
     commentNew.push(userName + ": " + comment);
     setNewComments(commentNew);
     setCommentInputState("");
