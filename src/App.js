@@ -7,6 +7,7 @@ import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
 import "./App.css";
 import loadingImg from "./images/loader.gif";
+import cogoToast from "cogo-toast";
 
 const App = () => {
   // start state variables
@@ -247,6 +248,8 @@ const App = () => {
         fetchFeeds();
         fetchComments();
         fetchLikes();
+        // alert("Comment Posted Successfully");
+        cogoToast.success("Comment Posted Successfully");
         return;
       })
       .catch((error) => {
@@ -266,20 +269,20 @@ const App = () => {
     e.preventDefault();
     let feed = currentUserName + " commented on " + ownerName + "'s feed";
     if (commentString.length < 2) {
-      alert("Your comment needs at least 2 characters");
+      // alert("Your comment needs at least 2 characters");
+      cogoToast.warn("Your comment needs at least 2 characters");
       return;
+    } else {
+      postComment(
+        e,
+        commentString,
+        feedId,
+        currentUserId,
+        ownerName,
+        currentUserName,
+        feed
+      );
     }
-    postComment(
-      e,
-      commentString,
-      feedId,
-      currentUserId,
-      ownerName,
-      currentUserName,
-      feed
-    );
-
-    alert("Comment Posted Successfully");
   };
 
   //Like a post
@@ -323,7 +326,8 @@ const App = () => {
     let feed = currentUserName + " liked " + ownerName + "'s feed";
     postLike(e, feedId, currentUserId, ownerName, currentUserName, feed);
 
-    alert("Feed Liked Successfully");
+    // alert("Feed Liked Successfully");
+    cogoToast.success("Feed Liked Successfully");
   };
 
   //Login
@@ -350,11 +354,13 @@ const App = () => {
           console.info("Info: (Returned Data) " + JSON.stringify(data));
         } else {
           console.warn("Warning: Invalid Email and/or password");
-          alert("Invalid Email and/or password");
+          // alert("Invalid Email and/or password");
+          cogoToast.error("Invalid Email and/or password");
         }
       })
       .catch((error) => {
-        alert("Invalid Email and/or password");
+        // alert("Invalid Email and/or password");
+        cogoToast.error("Invalid Email and/or password");
         console.error("Error: " + error);
       });
   };
@@ -420,12 +426,14 @@ const App = () => {
           console.info("Info (AccessToken): " + data.accessToken);
         } else {
           console.error("Error: " + data);
-          alert(data);
+          // alert(data);
+          cogoToast.error(data);
         }
       })
       .catch((error) => {
         console.log("Error: " + error);
-        alert("Email already in use");
+        // alert("Email already in use");
+        cogoToast.error("Email already in use");
       });
 
     console.log("The request: " + request);

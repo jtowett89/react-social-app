@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "../images/logo.png";
 import loading from "../images/loader.gif";
+import cogoToast from "cogo-toast";
 
 const Login = (props) => {
   let returnedValidationText = "";
@@ -47,7 +48,8 @@ const Login = (props) => {
       props.setLogin(emailAddress, password);
       setLoader(false);
     } else {
-      alert(returnedValidationText);
+      // alert(returnedValidationText);
+      cogoToast.error(returnedValidationText);
       setLoader(false);
     }
   };
@@ -67,7 +69,8 @@ const Login = (props) => {
       props.setRegistration(nameReg, emailAddressReg, passwordReg);
       setLoader(false);
     } else {
-      alert(returnedValidationText);
+      // alert(returnedValidationText);
+      cogoToast.error(returnedValidationText);
       setLoader(false);
     }
   };

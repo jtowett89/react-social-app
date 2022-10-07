@@ -159,7 +159,9 @@ const SingleFeed = (props) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              setFeedCommentsNumber(feedCommentsNumber + 1);
+              commentInputState.length > 2 &&
+                setFeedCommentsNumber(feedCommentsNumber + 1);
+
               props.handleComment(
                 e,
                 commentInputState,
@@ -168,7 +170,8 @@ const SingleFeed = (props) => {
                 ownerName,
                 currentUserName
               );
-              showNewComments(commentInputState, currentUserName, e);
+              commentInputState.length > 2 &&
+                showNewComments(commentInputState, currentUserName, e);
             }}
             style={{ display: "inline" }}
           >
