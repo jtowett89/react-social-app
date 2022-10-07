@@ -50,7 +50,7 @@ const Login = (props) => {
     } else {
       // alert(returnedValidationText);
       cogoToast.error(returnedValidationText, {
-        position: "bottom-left",
+        position: "top-right",
       });
       setLoader(false);
     }
@@ -73,7 +73,7 @@ const Login = (props) => {
     } else {
       // alert(returnedValidationText);
       cogoToast.error(returnedValidationText, {
-        position: "bottom-left",
+        position: "top-right",
       });
       setLoader(false);
     }

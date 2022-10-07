@@ -250,7 +250,7 @@ const App = () => {
         fetchLikes();
         // alert("Comment Posted Successfully");
         cogoToast.success("Comment Posted Successfully", {
-          position: "bottom-left",
+          position: "top-right",
         });
         return;
       })
@@ -273,7 +273,7 @@ const App = () => {
     if (commentString.length < 2) {
       // alert("Your comment needs at least 2 characters");
       cogoToast.warn("Your comment needs at least 2 characters", {
-        position: "bottom-left",
+        position: "top-right",
       });
       return;
     } else {
@@ -332,7 +332,7 @@ const App = () => {
 
     // alert("Feed Liked Successfully");
     cogoToast.success("Feed Liked Successfully", {
-      position: "bottom-left",
+      position: "top-right",
     });
   };
 
@@ -362,14 +362,14 @@ const App = () => {
           console.warn("Warning: Invalid Email and/or password");
           // alert("Invalid Email and/or password");
           cogoToast.error("Invalid Email and/or password", {
-            position: "bottom-left",
+            position: "top-right",
           });
         }
       })
       .catch((error) => {
         // alert("Invalid Email and/or password");
         cogoToast.error("Invalid Email and/or password", {
-          position: "bottom-left",
+          position: "top-right",
         });
         console.error("Error: " + error);
       });
@@ -438,7 +438,7 @@ const App = () => {
           console.error("Error: " + data);
           // alert(data);
           cogoToast.error(data, {
-            position: "bottom-left",
+            position: "top-right",
           });
         }
       })
@@ -446,7 +446,7 @@ const App = () => {
         console.log("Error: " + error);
         // alert("Email already in use");
         cogoToast.error("Email already in use", {
-          position: "bottom-left",
+          position: "top-right",
         });
       });
 
