@@ -49,7 +49,9 @@ const Login = (props) => {
       setLoader(false);
     } else {
       // alert(returnedValidationText);
-      cogoToast.error(returnedValidationText);
+      cogoToast.error(returnedValidationText, {
+        position: "bottom-left",
+      });
       setLoader(false);
     }
   };
@@ -70,7 +72,9 @@ const Login = (props) => {
       setLoader(false);
     } else {
       // alert(returnedValidationText);
-      cogoToast.error(returnedValidationText);
+      cogoToast.error(returnedValidationText, {
+        position: "bottom-left",
+      });
       setLoader(false);
     }
   };

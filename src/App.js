@@ -249,7 +249,9 @@ const App = () => {
         fetchComments();
         fetchLikes();
         // alert("Comment Posted Successfully");
-        cogoToast.success("Comment Posted Successfully");
+        cogoToast.success("Comment Posted Successfully", {
+          position: "bottom-left",
+        });
         return;
       })
       .catch((error) => {
@@ -270,7 +272,9 @@ const App = () => {
     let feed = currentUserName + " commented on " + ownerName + "'s feed";
     if (commentString.length < 2) {
       // alert("Your comment needs at least 2 characters");
-      cogoToast.warn("Your comment needs at least 2 characters");
+      cogoToast.warn("Your comment needs at least 2 characters", {
+        position: "bottom-left",
+      });
       return;
     } else {
       postComment(
@@ -327,7 +331,9 @@ const App = () => {
     postLike(e, feedId, currentUserId, ownerName, currentUserName, feed);
 
     // alert("Feed Liked Successfully");
-    cogoToast.success("Feed Liked Successfully");
+    cogoToast.success("Feed Liked Successfully", {
+      position: "bottom-left",
+    });
   };
 
   //Login
@@ -355,12 +361,16 @@ const App = () => {
         } else {
           console.warn("Warning: Invalid Email and/or password");
           // alert("Invalid Email and/or password");
-          cogoToast.error("Invalid Email and/or password");
+          cogoToast.error("Invalid Email and/or password", {
+            position: "bottom-left",
+          });
         }
       })
       .catch((error) => {
         // alert("Invalid Email and/or password");
-        cogoToast.error("Invalid Email and/or password");
+        cogoToast.error("Invalid Email and/or password", {
+          position: "bottom-left",
+        });
         console.error("Error: " + error);
       });
   };
@@ -427,13 +437,17 @@ const App = () => {
         } else {
           console.error("Error: " + data);
           // alert(data);
-          cogoToast.error(data);
+          cogoToast.error(data, {
+            position: "bottom-left",
+          });
         }
       })
       .catch((error) => {
         console.log("Error: " + error);
         // alert("Email already in use");
-        cogoToast.error("Email already in use");
+        cogoToast.error("Email already in use", {
+          position: "bottom-left",
+        });
       });
 
     console.log("The request: " + request);
