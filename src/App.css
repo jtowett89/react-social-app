@@ -100,8 +100,8 @@ input[type="password"] {
   width: 8em;
 }
 .logo-img {
-  height: auto;
-  width: 8em;
+  height: 4em;
+  width: auto;
 }
 .nav-right {
   height: 50px;
@@ -262,7 +262,7 @@ input[type="password"] {
   font-weight: 700;
 }
 .login-logo {
-  height: 4em;
+  height: 8em;
   display: block;
   margin: 0 auto;
 }
@@ -291,9 +291,9 @@ input[type="password"] {
   width: 100%;
   color: #fff;
   padding: 1em 2em;
-  background: #42ad49;
+  background: #646464;
   border-radius: 3em;
-  border: 2px solid #42ad49;
+  border: 2px solid #646464;
   font-weight: 600;
   font-size: 14px;
   margin-bottom: 1em;
@@ -303,9 +303,9 @@ input[type="password"] {
 }
 .login-btn:hover {
   width: 100%;
-  color: #42ad49;
+  color: #646464;
   background: #fff;
-  border: 2px solid #42ad49;
+  border: 2px solid #646464;
 }
 .newsfeed-btn {
   width: auto;

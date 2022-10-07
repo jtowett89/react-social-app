@@ -23,17 +23,17 @@ const Login = (props) => {
 
   //input values for input fields
   const handleChange = (e) => {
-    const [name, email, password] = e.target.name;
+    const input = e.target.name;
 
-    if (e.target.name === "email") {
+    if (input === "email") {
       setEmailAddress(e.target.value);
-    } else if (e.target.name === "password") {
+    } else if (input === "password") {
       setPassword(e.target.value);
-    } else if (e.target.name === "name_reg") {
+    } else if (input === "name_reg") {
       setNameReg(e.target.value);
-    } else if (e.target.name === "email_reg") {
+    } else if (input === "email_reg") {
       setEmailAddressReg(e.target.value);
-    } else if (e.target.name === "password_reg") {
+    } else if (input === "password_reg") {
       setPasswordReg(e.target.value);
     }
   };

@@ -27,13 +27,13 @@ const App = () => {
       email: "",
       password: "",
       photo: "http://joeto.zerone.co.ke/images/user.jpg",
-      friends: []
-    }
+      friends: [],
+    },
   });
   //end state variables
 
   // let baseUrl = "http://localhost:3004";
-  let baseUrl = "https://zeraki-json-server-database.herokuapp.com";
+  let baseUrl = "https://justice-json-server-database.herokuapp.com";
   let userId;
   let loggedInUserDetails = localStorage.getItem("userDetails");
   loggedInUserDetails !==
@@ -45,8 +45,8 @@ const App = () => {
         email: "",
         password: "",
         photo: "http://justice.zerone.co.ke/images/user.jpg",
-        friends: []
-      }
+        friends: [],
+      },
     }) && loggedInUserDetails !== null
     ? (userId = JSON.parse(loggedInUserDetails).user.id)
     : (userId = 0);
@@ -197,11 +197,11 @@ const App = () => {
       method: "POST",
       body: JSON.stringify({
         ownerId: currentUserId,
-        feed: feed
+        feed: feed,
       }),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -234,11 +234,11 @@ const App = () => {
       body: JSON.stringify({
         ownerId: currentUserId,
         comment: commentString,
-        feedId: feedId
+        feedId: feedId,
       }),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -297,11 +297,11 @@ const App = () => {
       method: "POST",
       body: JSON.stringify({
         likerId: currentUserId,
-        feedId: feedId
+        feedId: feedId,
       }),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -334,11 +334,11 @@ const App = () => {
       cache: "default",
       body: JSON.stringify({
         email: email,
-        password: password
+        password: password,
       }),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -368,46 +368,46 @@ const App = () => {
     let friendsData = [
       {
         id: 1,
-        friendId: 54
+        friendId: 54,
       },
       {
         id: 2,
-        friendId: 63
+        friendId: 63,
       },
       {
         id: 3,
-        friendId: 1
+        friendId: 1,
       },
       {
         id: 4,
-        friendId: 9
+        friendId: 9,
       },
       {
         id: 5,
-        friendId: 59
+        friendId: 59,
       },
       {
         id: 6,
-        friendId: 60
+        friendId: 60,
       },
       {
         id: 6,
-        friendId: 58
-      }
+        friendId: 58,
+      },
     ];
     console.log(JSON.stringify(friendsData));
     const request = fetch(baseUrl + "/register", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name: name,
         email: email,
         password: password,
         photo: photo,
-        friends: friendsData
-      })
+        friends: friendsData,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -444,8 +444,8 @@ const App = () => {
           email: "",
           password: "",
           photo: "http://justice.zerone.co.ke/images/user.jpg",
-          friends: []
-        }
+          friends: [],
+        },
       })
     );
     setUserDetails({
@@ -456,8 +456,8 @@ const App = () => {
         email: "",
         password: "",
         photo: "http://justice.zerone.co.ke/images/user.jpg",
-        friends: []
-      }
+        friends: [],
+      },
     });
   };
 
@@ -485,8 +485,8 @@ const App = () => {
           email: "",
           password: "",
           photo: "http://justice.zerone.co.ke/images/user.jpg",
-          friends: []
-        }
+          friends: [],
+        },
       })
     ) {
       setUserDetails(JSON.parse(personDetails));
@@ -518,8 +518,8 @@ const App = () => {
                 email: "",
                 password: "",
                 photo: "http://joeto.zerone.co.ke/images/user.jpg",
-                friends: []
-              }
+                friends: [],
+              },
             } &&
           userDetails !== null ? (
             <>

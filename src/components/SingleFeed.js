@@ -93,7 +93,7 @@ const SingleFeed = (props) => {
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <img className="feed-thumb" src={ownerPhoto} alt="" />
@@ -176,7 +176,7 @@ const SingleFeed = (props) => {
               style={{
                 width: "75% ",
                 borderBottomRightRadius: "0px ",
-                borderTopRightRadius: "0px "
+                borderTopRightRadius: "0px ",
               }}
               placeholder="Comment..."
               onChange={handleChange}
@@ -195,7 +195,7 @@ const SingleFeed = (props) => {
                 height: "3em",
                 marginBottom: "0 !important",
                 paddingRight: "0.5em",
-                paddingLeft: "0.5em"
+                paddingLeft: "0.5em",
               }}
             >
               <i className="fa fa-send"></i>
