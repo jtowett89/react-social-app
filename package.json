@@ -1,5 +1,4 @@
 {
-  "homepage": "https://jtowett89.github.com/react-social-app",
   "name": "justice-social-app",
   "version": "0.1.0",
   "private": true,
@@ -26,8 +25,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "serve-json": "json-server -w db.json -p 3004 -m ./node_modules/json-server-auth"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -47,8 +45,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "json-server": "^0.17.0",
-    "json-server-auth": "^2.1.0"
-  }
+  "devDependencies": {}
 }
