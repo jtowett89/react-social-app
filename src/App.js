@@ -33,9 +33,9 @@ const App = () => {
   });
   //end state variables
 
-  // let baseUrl = "http://localhost:3004";
-  let baseUrl =
-    "https://my-json-server.typicode.com/jtowett89/json_server_database";
+  let baseUrl = "http://localhost:3004";
+  // let baseUrl =
+  //   "https://my-json-server.typicode.com/jtowett89/json_server_database";
   let userId;
   let loggedInUserDetails = localStorage.getItem("userDetails");
   loggedInUserDetails !==
