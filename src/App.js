@@ -46,7 +46,7 @@ const App = () => {
         name: "",
         email: "",
         password: "",
-        photo: "http://justice.zerone.co.ke/images/user.jpg",
+        photo: "http://joeto.zerone.co.ke/images/user.jpg",
         friends: []
       }
     }) && loggedInUserDetails !== null
@@ -428,6 +428,7 @@ const App = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log("The data: " + JSON.stringify(data));
         if (data.user.email !== "") {
           setUserDetails(data);
           localStorage.setItem("userDetails", JSON.stringify(data));
@@ -466,7 +467,7 @@ const App = () => {
           name: "",
           email: "",
           password: "",
-          photo: "http://justice.zerone.co.ke/images/user.jpg",
+          photo: "http://joeto.zerone.co.ke/images/user.jpg",
           friends: []
         }
       })
@@ -478,7 +479,7 @@ const App = () => {
         name: "",
         email: "",
         password: "",
-        photo: "http://justice.zerone.co.ke/images/user.jpg",
+        photo: "http://joeto.zerone.co.ke/images/user.jpg",
         friends: []
       }
     });
@@ -507,7 +508,7 @@ const App = () => {
           name: "",
           email: "",
           password: "",
-          photo: "http://justice.zerone.co.ke/images/user.jpg",
+          photo: "http://joeto.zerone.co.ke/images/user.jpg",
           friends: []
         }
       })
