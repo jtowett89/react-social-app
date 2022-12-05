@@ -28,13 +28,14 @@ const App = () => {
       email: "",
       password: "",
       photo: "http://joeto.zerone.co.ke/images/user.jpg",
-      friends: [],
-    },
+      friends: []
+    }
   });
   //end state variables
 
   // let baseUrl = "http://localhost:3004";
-  let baseUrl = "https://justice-json-server-database.herokuapp.com";
+  let baseUrl =
+    "https://my-json-server.typicode.com/jtowett89/json_server_database";
   let userId;
   let loggedInUserDetails = localStorage.getItem("userDetails");
   loggedInUserDetails !==
@@ -46,8 +47,8 @@ const App = () => {
         email: "",
         password: "",
         photo: "http://justice.zerone.co.ke/images/user.jpg",
-        friends: [],
-      },
+        friends: []
+      }
     }) && loggedInUserDetails !== null
     ? (userId = JSON.parse(loggedInUserDetails).user.id)
     : (userId = 0);
@@ -198,11 +199,11 @@ const App = () => {
       method: "POST",
       body: JSON.stringify({
         ownerId: currentUserId,
-        feed: feed,
+        feed: feed
       }),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     })
       .then((response) => response.json())
       .then((data) => {
@@ -235,11 +236,11 @@ const App = () => {
       body: JSON.stringify({
         ownerId: currentUserId,
         comment: commentString,
-        feedId: feedId,
+        feedId: feedId
       }),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     })
       .then((response) => response.json())
       .then((data) => {
@@ -250,7 +251,7 @@ const App = () => {
         fetchLikes();
         // alert("Comment Posted Successfully");
         cogoToast.success("Comment Posted Successfully", {
-          position: "top-right",
+          position: "top-right"
         });
         return;
       })
@@ -273,7 +274,7 @@ const App = () => {
     if (commentString.length < 2) {
       // alert("Your comment needs at least 2 characters");
       cogoToast.warn("Your comment needs at least 2 characters", {
-        position: "top-right",
+        position: "top-right"
       });
       return;
     } else {
@@ -304,11 +305,11 @@ const App = () => {
       method: "POST",
       body: JSON.stringify({
         likerId: currentUserId,
-        feedId: feedId,
+        feedId: feedId
       }),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     })
       .then((response) => response.json())
       .then((data) => {
@@ -332,7 +333,7 @@ const App = () => {
 
     // alert("Feed Liked Successfully");
     cogoToast.success("Feed Liked Successfully", {
-      position: "top-right",
+      position: "top-right"
     });
   };
 
@@ -344,11 +345,11 @@ const App = () => {
       cache: "default",
       body: JSON.stringify({
         email: email,
-        password: password,
+        password: password
       }),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     })
       .then((res) => res.json())
       .then((data) => {
@@ -362,14 +363,14 @@ const App = () => {
           console.warn("Warning: Invalid Email and/or password");
           // alert("Invalid Email and/or password");
           cogoToast.error("Invalid Email and/or password", {
-            position: "top-right",
+            position: "top-right"
           });
         }
       })
       .catch((error) => {
         // alert("Invalid Email and/or password");
         cogoToast.error("Invalid Email and/or password", {
-          position: "top-right",
+          position: "top-right"
         });
         console.error("Error: " + error);
       });
@@ -384,46 +385,46 @@ const App = () => {
     let friendsData = [
       {
         id: 1,
-        friendId: 54,
+        friendId: 54
       },
       {
         id: 2,
-        friendId: 63,
+        friendId: 63
       },
       {
         id: 3,
-        friendId: 1,
+        friendId: 1
       },
       {
         id: 4,
-        friendId: 9,
+        friendId: 9
       },
       {
         id: 5,
-        friendId: 59,
+        friendId: 59
       },
       {
         id: 6,
-        friendId: 60,
+        friendId: 60
       },
       {
         id: 6,
-        friendId: 58,
-      },
+        friendId: 58
+      }
     ];
     console.log(JSON.stringify(friendsData));
     const request = fetch(baseUrl + "/register", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-        photo: photo,
-        friends: friendsData,
-      }),
+        name,
+        email,
+        password,
+        photo,
+        friends: friendsData
+      })
     })
       .then((res) => res.json())
       .then((data) => {
@@ -438,15 +439,15 @@ const App = () => {
           console.error("Error: " + data);
           // alert(data);
           cogoToast.error(data, {
-            position: "top-right",
+            position: "top-right"
           });
         }
       })
       .catch((error) => {
         console.log("Error: " + error);
         // alert("Email already in use");
-        cogoToast.error("Email already in use", {
-          position: "top-right",
+        cogoToast.error(error.toString(), {
+          position: "top-right"
         });
       });
 
@@ -466,8 +467,8 @@ const App = () => {
           email: "",
           password: "",
           photo: "http://justice.zerone.co.ke/images/user.jpg",
-          friends: [],
-        },
+          friends: []
+        }
       })
     );
     setUserDetails({
@@ -478,8 +479,8 @@ const App = () => {
         email: "",
         password: "",
         photo: "http://justice.zerone.co.ke/images/user.jpg",
-        friends: [],
-      },
+        friends: []
+      }
     });
   };
 
@@ -507,8 +508,8 @@ const App = () => {
           email: "",
           password: "",
           photo: "http://justice.zerone.co.ke/images/user.jpg",
-          friends: [],
-        },
+          friends: []
+        }
       })
     ) {
       setUserDetails(JSON.parse(personDetails));
@@ -540,8 +541,8 @@ const App = () => {
                 email: "",
                 password: "",
                 photo: "http://joeto.zerone.co.ke/images/user.jpg",
-                friends: [],
-              },
+                friends: []
+              }
             } &&
           userDetails !== null ? (
             <>

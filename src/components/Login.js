@@ -50,7 +50,7 @@ const Login = (props) => {
     } else {
       // alert(returnedValidationText);
       cogoToast.error(returnedValidationText, {
-        position: "top-right",
+        position: "top-right"
       });
       setLoader(false);
     }
@@ -73,7 +73,7 @@ const Login = (props) => {
     } else {
       // alert(returnedValidationText);
       cogoToast.error(returnedValidationText, {
-        position: "top-right",
+        position: "top-right"
       });
       setLoader(false);
     }
@@ -144,7 +144,7 @@ const Login = (props) => {
             <label>Email</label>
             <input
               id="email"
-              type="text"
+              type="email"
               name="email"
               onChange={handleChange}
               value={emailAddress}
@@ -194,7 +194,7 @@ const Login = (props) => {
             <label>Email</label>
             <input
               id="email_reg"
-              type="text"
+              type="email"
               name="email_reg"
               onChange={handleChange}
               value={emailAddressReg}
