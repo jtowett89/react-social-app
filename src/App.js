@@ -33,8 +33,8 @@ const App = () => {
   });
   //end state variables
 
-  let baseUrl = "http://localhost:3004";
-  // let baseUrl = "https://silk-scarce-principal.glitch.me";
+  // let baseUrl = "http://localhost:3004";
+  let baseUrl = "https://silk-scarce-principal.glitch.me";
   let userId;
   let loggedInUserDetails = localStorage.getItem("userDetails");
   loggedInUserDetails !==
