@@ -5,7 +5,7 @@ const Navigation = (props) => {
   return (
     <div className="navigation">
       <div className="logo">
-        <a href="/zeraki-newsfeed">
+        <a href="/">
           <img src={logo} className="logo-img" alt="" />
         </a>
       </div>

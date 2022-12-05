@@ -34,8 +34,7 @@ const App = () => {
   //end state variables
 
   let baseUrl = "http://localhost:3004";
-  // let baseUrl =
-  //   "https://my-json-server.typicode.com/jtowett89/json_server_database";
+  // let baseUrl = "https://silk-scarce-principal.glitch.me";
   let userId;
   let loggedInUserDetails = localStorage.getItem("userDetails");
   loggedInUserDetails !==
@@ -353,7 +352,7 @@ const App = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.user.email !== "") {
+        if (data.user) {
           localStorage.setItem("isLoggedIn", "true");
           setLoggedInState(localStorage.getItem("isLoggedIn"));
           localStorage.setItem("userDetails", JSON.stringify(data));
@@ -429,7 +428,7 @@ const App = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("The data: " + JSON.stringify(data));
-        if (data.user.email !== "") {
+        if (data.user) {
           setUserDetails(data);
           localStorage.setItem("userDetails", JSON.stringify(data));
           localStorage.setItem("isLoggedIn", "true");
