@@ -15,22 +15,28 @@ const Newsfeed = (props) => {
             <i className="fa fa-refresh"></i> Show All
           </button>
         </h2>
-        {feedsData.map((feed) => {
-          return (
-            <SingleFeed
-              handleComment={props.handleComment}
-              handleLike={props.handleLike}
-              key={feed.id}
-              ownerId={feed.ownerId}
-              feed={feed.feed}
-              feedId={feed.id}
-              allUsers={props.allUsers}
-              currentUser={props.userDetails}
-              likes={props.likes}
-              comments={props.comments}
-            />
-          );
-        })}
+        {feedsData.length > 0 ? (
+          feedsData.map((feed) => {
+            return (
+              <SingleFeed
+                handleComment={props.handleComment}
+                handleLike={props.handleLike}
+                key={feed.id}
+                ownerId={feed.ownerId}
+                feed={feed.feed}
+                feedId={feed.id}
+                allUsers={props.allUsers}
+                currentUser={props.userDetails}
+                likes={props.likes}
+                comments={props.comments}
+              />
+            );
+          })
+        ) : (
+          <div>
+            <h1>This user has no posts yet</h1>
+          </div>
+        )}
       </div>
     </div>
   );
