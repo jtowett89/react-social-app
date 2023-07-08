@@ -15,7 +15,7 @@ const App = () => {
   const [fetchedFeedsData, setFetchedFeedsData] = useState([]);
   const [loggedInState, setLoggedInState] = useState(null);
   const [photo, setPhoto] = useState(
-    "http://joeto.zerone.co.ke/images/user.jpg"
+    "http://newsfeed.smodern.co.ke/images/user.jpg"
   );
   const [isLoading, setIsLoading] = useState(true);
   const [fetchedLikesData, setFetchedLikesData] = useState([]);
@@ -27,7 +27,7 @@ const App = () => {
       name: "",
       email: "",
       password: "",
-      photo: "http://joeto.zerone.co.ke/images/user.jpg",
+      photo: "http://newsfeed.smodern.co.ke/images/user.jpg",
       friends: []
     }
   });
@@ -45,7 +45,7 @@ const App = () => {
         name: "",
         email: "",
         password: "",
-        photo: "http://joeto.zerone.co.ke/images/user.jpg",
+        photo: "http://newsfeed.smodern.co.ke/images/user.jpg",
         friends: []
       }
     }) && loggedInUserDetails !== null
@@ -466,7 +466,7 @@ const App = () => {
           name: "",
           email: "",
           password: "",
-          photo: "http://joeto.zerone.co.ke/images/user.jpg",
+          photo: "http://newsfeed.smodern.co.ke/images/user.jpg",
           friends: []
         }
       })
@@ -478,7 +478,7 @@ const App = () => {
         name: "",
         email: "",
         password: "",
-        photo: "http://joeto.zerone.co.ke/images/user.jpg",
+        photo: "http://newsfeed.smodern.co.ke/images/user.jpg",
         friends: []
       }
     });
@@ -507,7 +507,7 @@ const App = () => {
           name: "",
           email: "",
           password: "",
-          photo: "http://joeto.zerone.co.ke/images/user.jpg",
+          photo: "http://newsfeed.smodern.co.ke/images/user.jpg",
           friends: []
         }
       })
@@ -540,7 +540,7 @@ const App = () => {
                 name: "",
                 email: "",
                 password: "",
-                photo: "http://joeto.zerone.co.ke/images/user.jpg",
+                photo: "http://newsfeed.smodern.co.ke/images/user.jpg",
                 friends: []
               }
             } &&
