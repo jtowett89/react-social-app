@@ -34,7 +34,7 @@ const Newsfeed = (props) => {
           })
         ) : (
           <div>
-            <h1>This user has no posts yet</h1>
+            <h1>Oooops!! Seems like this user has no posts yet.</h1>
           </div>
         )}
       </div>
