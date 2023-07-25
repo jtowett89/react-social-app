@@ -8,19 +8,31 @@ const Sidebar = (props) => {
     console.log("Friends: " + props.userDetails.user.friends);
 
     friends.forEach((friend) => {
-      const friendId = friend.friendId;
+      // const friendId = friend.friendId;
       for (let i = 0; i < allData.length; i++) {
-        if (allData[i].id === friendId) {
-          friendsArray.push(
-            <FriendSingle
-              showFriendFeeds={props.showFriendFeeds}
-              key={allData[i].id}
-              friendId={allData[i].id}
-              name={allData[i].name}
-              photo={allData[i].photo}
-            />
-          );
-        }
+        // if (allData[i].id === friendId) {
+        //   friendsArray.push(
+        //     <FriendSingle
+        //       showFriendFeeds={props.showFriendFeeds}
+        //       key={allData[i].id}
+        //       friendId={allData[i].id}
+        //       name={allData[i].name}
+        //       photo={allData[i].photo}
+        //     />
+        //   );
+        // }
+
+        // Start show All users
+        friendsArray.push(
+          <FriendSingle
+            showFriendFeeds={props.showFriendFeeds}
+            key={allData[i].id}
+            friendId={allData[i].id}
+            name={allData[i].name}
+            photo={allData[i].photo}
+          />
+        );
+        // End show all users
       }
     });
     return friendsArray.map((single) => {
@@ -32,7 +44,7 @@ const Sidebar = (props) => {
     <div id="sidebar" className="sidebar component-padding">
       <div className="sidebar-content">
         <div className="sidebar-heading-wrap">
-          <h3 className="sidebar-heading">Following</h3>
+          <h3 className="sidebar-heading">Users</h3>
           <a onClick={props.hideFriends} className="ml-auto sidebar-close">
             <i className="fa fa-times"></i> Close
           </a>
