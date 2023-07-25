@@ -3,13 +3,31 @@ import FriendSingle from "./FriendSingle";
 const Sidebar = (props) => {
   const populateData = () => {
     const allData = props.fetchedUsersData;
-    const friends = props.userDetails.user.friends;
+    // const friends = props.userDetails.user.friends;
     let friendsArray = [];
     console.log("Friends: " + props.userDetails.user.friends);
 
-    friends.forEach((friend) => {
-      // const friendId = friend.friendId;
-      for (let i = 0; i < allData.length; i++) {
+    allData &&
+      allData.forEach((friend) => {
+        // Start show All users
+        friendsArray.push(
+          <FriendSingle
+            showFriendFeeds={props.showFriendFeeds}
+            // key={allData[i].id}
+            // friendId={allData[i].id}
+            // name={allData[i].name}
+            // photo={allData[i].photo}
+            key={friend.id}
+            friendId={friend.id}
+            name={friend.name}
+            photo={friend.photo}
+          />
+        );
+        // End show all users
+
+        // friends.forEach((friend) => {
+        // const friendId = friend.friendId;
+        // for (let i = 0; i < allData.length; i++) {
         // if (allData[i].id === friendId) {
         //   friendsArray.push(
         //     <FriendSingle
@@ -21,20 +39,8 @@ const Sidebar = (props) => {
         //     />
         //   );
         // }
-
-        // Start show All users
-        friendsArray.push(
-          <FriendSingle
-            showFriendFeeds={props.showFriendFeeds}
-            key={allData[i].id}
-            friendId={allData[i].id}
-            name={allData[i].name}
-            photo={allData[i].photo}
-          />
-        );
-        // End show all users
-      }
-    });
+        // }
+      });
     return friendsArray.map((single) => {
       return single;
     });

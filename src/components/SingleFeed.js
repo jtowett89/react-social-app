@@ -14,7 +14,7 @@ const SingleFeed = (props) => {
   const [feedLikes, setFeedLikes] = useState(0);
   const [feedCommentsNumber, setFeedCommentsNumber] = useState(0);
   const [ownerPhoto, setOwnerPhoto] = useState(
-    "http://joeto.zerone.co.ke/images/user.jpg"
+    "http://newsfeed.smodern.co.ke/images/user.jpg"
   );
   const [ownerName, setOwnerName] = useState("");
   const [liked, setLiked] = useState(false);
