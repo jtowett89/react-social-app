@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div className="footer component-padding">
       <div className="footer-content">
-        <p>&copy; {year} Justice Newsfeed. All rights reserved</p>
+        <p>&copy; {year} Justice Social App. All rights reserved</p>
       </div>
     </div>
   );

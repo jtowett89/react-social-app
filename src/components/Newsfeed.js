@@ -9,7 +9,7 @@ const Newsfeed = (props) => {
       <div className="newsfeed-content">
         <h2 className="newsfeed-heading">
           <span>
-            <i className="fa fa-comments-o"></i> News Feed
+            <i className="fa fa-comments-o"></i> Updates
           </span>{" "}
           <button onClick={props.showAll} className="newsfeed-btn ml-auto">
             <i className="fa fa-refresh"></i> Show All
