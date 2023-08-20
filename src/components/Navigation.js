@@ -16,7 +16,7 @@ const Navigation = (props) => {
           </a>
           <a onClick={props.setLogout} className="nav-links">
             <span className="btn-logout-nav">
-              <i className="fa fa-sign-out"></i> Log Out
+              <i className="fa fa-sign-out"></i> Sign Out
             </span>
           </a>
         </div>
