@@ -34,7 +34,7 @@ const App = () => {
   //end state variables
 
   // let baseUrl = "http://localhost:3004";
-  let baseUrl = "https://wooded-eager-celsius.glitch.me";
+  let baseUrl = "https://json-server-d0ki.onrender.com";
   let userId;
   let loggedInUserDetails = localStorage.getItem("userDetails");
   loggedInUserDetails !==
